@@ -1,0 +1,29 @@
+<app-multi-page-layout [activePage]="activePage" [visiblePages]="visiblePages">
+  <ng-container *ngFor="let _ of [].constructor(totalPages); let i = index">
+    <div *appMultiPageLayoutItem>
+      <ng-container *ngTemplateOutlet="page; context: {page: i}"></ng-container>
+    </div>
+  </ng-container>
+</app-multi-page-layout>
+
+<ng-template #page let-page="page">
+  <p>Page {{ page }}</p>
+  <p>Visible pages count:</p>
+  <div class="controls">
+    <button
+      *ngFor="let _ of [].constructor(totalPages); let i = index"
+      (click)="changePagesCount(i + 1)"
+    >
+      {{ i+1 }}
+    </button>
+  </div>
+  <p>Active page:</p>
+  <div class="controls">
+    <button
+      *ngFor="let _ of [].constructor(totalPages); let i = index"
+      (click)="changeActivePage(i)"
+    >
+      {{ i }}
+    </button>
+  </div>
+</ng-template>
